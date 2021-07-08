@@ -4,7 +4,6 @@ import (
 	"crypto/tls"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"time"
 
@@ -44,7 +43,7 @@ func DoHTTP(method string, url string, body io.Reader, setFunc setRequest, out i
 
 	buf, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Printf("read body failed:%s", err)
+		//log.Printf("read body failed:%s", err)
 		return err
 	}
 
@@ -53,7 +52,7 @@ func DoHTTP(method string, url string, body io.Reader, setFunc setRequest, out i
 			*s = string(buf)
 		} else {
 			if err := json.Unmarshal(buf, out); err != nil {
-				log.Printf("unmarshal failed:%s", err)
+				//log.Printf("unmarshal failed:%s", err)
 				return err
 			}
 		}
