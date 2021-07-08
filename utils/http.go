@@ -52,7 +52,7 @@ func DoHTTP(method string, url string, body io.Reader, setFunc setRequest, out i
 		if s, ok := out.(*string); ok {
 			*s = string(buf)
 		} else {
-			if err := json.Unmarshal(buf, obj); err != nil {
+			if err := json.Unmarshal(buf, out); err != nil {
 				log.Printf("unmarshal failed:%s", err)
 				return err
 			}
