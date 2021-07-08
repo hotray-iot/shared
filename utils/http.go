@@ -17,7 +17,7 @@ var (
 
 type setRequest func(*http.Request)
 
-func DoHTTP(method string, setFunc setRequest, body io.Reader, url string, obj interface{}) error {
+func DoHTTP(method string, url string, body io.Reader, setFunc setRequest, out interface{}) error {
 
 	request, err := http.NewRequest(method, url, body)
 	if err != nil {
@@ -48,8 +48,8 @@ func DoHTTP(method string, setFunc setRequest, body io.Reader, url string, obj i
 		return err
 	}
 
-	if obj != nil {
-		if s, ok := obj.(*string); ok {
+	if out != nil {
+		if s, ok := out.(*string); ok {
 			*s = string(buf)
 		} else {
 			if err := json.Unmarshal(buf, obj); err != nil {
